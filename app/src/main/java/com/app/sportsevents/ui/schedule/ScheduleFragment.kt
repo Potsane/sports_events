@@ -1,42 +1,37 @@
 package com.app.sportsevents.ui.schedule
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.app.sportsevents.R
+import com.app.sportsevents.common.SportEventCardListAdapter
 import com.app.sportsevents.databinding.FragmentScheduleBinding
+import com.app.sportsevents.network.entity.SportEvent
+import com.app.sportsevents.ui.base.BaseSportsEventsFragment
+import com.app.sportsevents.utils.getMocks
 
-class ScheduleFragment : Fragment() {
+class ScheduleFragment : BaseSportsEventsFragment<ScheduleViewModel, FragmentScheduleBinding>() {
 
-    private var _binding: FragmentScheduleBinding? = null
+    private var adapter: SportEventCardListAdapter? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    override fun createViewModel() = ViewModelProvider(this)[ScheduleViewModel::class.java]
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val scheduleViewModel =
-            ViewModelProvider(this).get(ScheduleViewModel::class.java)
+    override fun getLayoutId() = R.layout.fragment_schedule
 
-        _binding = FragmentScheduleBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        scheduleViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+    override fun onResume() {
+        super.onResume()
+        viewModel.onResume()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        updateAdapter(getMocks())
+    }
+
+    private fun updateAdapter(items: List<SportEvent>) {
+        adapter?.updateItems(items.toMutableList()) ?: run {
+            adapter = SportEventCardListAdapter(items.toMutableList(), viewModel)
+            binding.eventsView.adapter = adapter
+        }
     }
 }

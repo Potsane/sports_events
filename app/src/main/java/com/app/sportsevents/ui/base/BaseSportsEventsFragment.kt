@@ -21,7 +21,6 @@ abstract class BaseSportsEventsFragment<VM : BaseSportsEventsViewModel, VDB : Vi
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = DataBindingUtil.inflate(
             inflater,
             getLayoutId(),
