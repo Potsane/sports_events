@@ -18,23 +18,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingBottom="16dp">
+            android:paddingBottom="8dp">
 
             <TextView
                 android:id="@+id/text_view_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="start"
                 android:text="@{item.title}"
@@ -46,12 +46,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="This is some heading" />
 
-<!--                app:text="@{item.subtitle}"-->
             <TextView
                 android:id="@+id/text_view_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Text here"
+                app:text="@{item.subtitle}"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
