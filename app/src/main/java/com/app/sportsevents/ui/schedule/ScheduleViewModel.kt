@@ -7,12 +7,14 @@ import com.app.sportsevents.common.SportEventCardClickListener
 import com.app.sportsevents.network.entity.SportEvent
 import com.app.sportsevents.repository.SportEventsRepository
 import com.app.sportsevents.ui.base.BaseSportsEventsViewModel
-import com.app.sportsevents.utils.getMocks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ScheduleViewModel() : BaseSportsEventsViewModel(), SportEventCardClickListener {
+@HiltViewModel
+class ScheduleViewModel @Inject constructor(
+    private val repository: SportEventsRepository
+) : BaseSportsEventsViewModel(), SportEventCardClickListener {
 
     private val _schedule = MutableLiveData<List<SportEvent>>()
     val schedule: LiveData<List<SportEvent>> = _schedule
@@ -22,14 +24,13 @@ class ScheduleViewModel() : BaseSportsEventsViewModel(), SportEventCardClickList
     }
 
     private fun getEvents() {
-        _schedule.value = getMocks()
-        /*viewModelScope.launch {
+        viewModelScope.launch {
             repository.getSchedule().let { response ->
                 if (response.isSuccessful) {
                     _schedule.value = response.body()
                 }
             }
-        }*/
+        }
     }
 
     override fun onEventCardClick(sportEvent: SportEvent) {
