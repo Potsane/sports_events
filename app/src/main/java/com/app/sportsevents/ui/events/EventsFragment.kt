@@ -9,7 +9,6 @@ import com.app.sportsevents.common.SportEventCardListAdapter
 import com.app.sportsevents.databinding.FragmentEventsBinding
 import com.app.sportsevents.network.entity.SportEvent
 import com.app.sportsevents.ui.base.BaseSportsEventsFragment
-import com.app.sportsevents.utils.getMocks
 
 class EventsFragment : BaseSportsEventsFragment<EventsViewModel, FragmentEventsBinding>() {
 
@@ -21,8 +20,7 @@ class EventsFragment : BaseSportsEventsFragment<EventsViewModel, FragmentEventsB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //viewModel.events.observe(viewLifecycleOwner, Observer(::updateAdapter))
-        updateAdapter(getMocks())
+        viewModel.events.observe(viewLifecycleOwner, Observer(::updateAdapter))
     }
 
     private fun updateAdapter(items: List<SportEvent>) {

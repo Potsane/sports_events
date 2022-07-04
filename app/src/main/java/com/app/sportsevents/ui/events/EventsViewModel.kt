@@ -23,7 +23,6 @@ class EventsViewModel() : BaseSportsEventsViewModel(), SportEventCardClickListen
         if (_events.value == null) {
             getEvents()
         }
-
     }
 
     private fun getEvents() {

@@ -2,13 +2,13 @@ package com.app.sportsevents.ui.schedule
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.app.sportsevents.R
 import com.app.sportsevents.common.SportEventCardListAdapter
 import com.app.sportsevents.databinding.FragmentScheduleBinding
 import com.app.sportsevents.network.entity.SportEvent
 import com.app.sportsevents.ui.base.BaseSportsEventsFragment
-import com.app.sportsevents.utils.getMocks
 
 class ScheduleFragment : BaseSportsEventsFragment<ScheduleViewModel, FragmentScheduleBinding>() {
 
@@ -25,7 +25,7 @@ class ScheduleFragment : BaseSportsEventsFragment<ScheduleViewModel, FragmentSch
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateAdapter(getMocks())
+        viewModel.schedule.observe(viewLifecycleOwner, Observer(::updateAdapter))
     }
 
     private fun updateAdapter(items: List<SportEvent>) {

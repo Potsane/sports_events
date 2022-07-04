@@ -9,6 +9,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 fun setAvatarSrcUrl(imageView: ImageView, srcUrl: String?) {
     Glide.with(imageView.context)
         .load(srcUrl)
+        .override(350, 350)
+        .fitCenter()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(imageView)
 }
