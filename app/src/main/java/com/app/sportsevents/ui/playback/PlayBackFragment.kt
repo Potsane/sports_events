@@ -1,42 +1,36 @@
 package com.app.sportsevents.ui.playback
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.app.sportsevents.R
+import com.app.sportsevents.common.MediaPlayerFactory
 import com.app.sportsevents.databinding.FragmentPlaybackBinding
+import com.app.sportsevents.ui.base.BaseSportsEventsFragment
+import com.google.android.exoplayer2.Player
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class PlayBackFragment : Fragment() {
+@AndroidEntryPoint
+class PlayBackFragment : BaseSportsEventsFragment<PlayBackViewModel, FragmentPlaybackBinding>() , Player.Listener{
 
-    private var _binding: FragmentPlaybackBinding? = null
+    @Inject
+    lateinit var mediaPlayerFactory: MediaPlayerFactory
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    override fun createViewModel() = ViewModelProvider(this)[PlayBackViewModel::class.java]
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val playBackViewModel =
-            ViewModelProvider(this).get(PlayBackViewModel::class.java)
+    override fun getLayoutId() = R.layout.fragment_playback
 
-        _binding = FragmentPlaybackBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        playBackViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val videoView = binding.videoView
+        videoView.player = mediaPlayerFactory.createMediaPlayer(this)
+        mediaPlayerFactory.addVideo()
+        mediaPlayerFactory.play()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onPause() {
+        super.onPause()
+        mediaPlayerFactory.stop()
     }
 }

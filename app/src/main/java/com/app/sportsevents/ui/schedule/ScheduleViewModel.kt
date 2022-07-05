@@ -3,6 +3,7 @@ package com.app.sportsevents.ui.schedule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.app.sportsevents.common.MediaPlayerFactory
 import com.app.sportsevents.common.SportEventCardClickListener
 import com.app.sportsevents.network.entity.SportEvent
 import com.app.sportsevents.repository.SportEventsRepository
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
-    private val repository: SportEventsRepository
+    private val repository: SportEventsRepository,
+    private val mediaPlayerFactory: MediaPlayerFactory
 ) : BaseSportsEventsViewModel(), SportEventCardClickListener {
 
     private val _schedule = MutableLiveData<List<SportEvent>>()

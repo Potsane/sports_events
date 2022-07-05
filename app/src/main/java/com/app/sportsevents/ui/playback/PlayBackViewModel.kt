@@ -1,13 +1,5 @@
 package com.app.sportsevents.ui.playback
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.app.sportsevents.ui.base.BaseSportsEventsViewModel
 
-class PlayBackViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
-}
+class PlayBackViewModel : BaseSportsEventsViewModel()

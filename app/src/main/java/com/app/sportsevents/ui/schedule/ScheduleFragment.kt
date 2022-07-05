@@ -33,7 +33,7 @@ class ScheduleFragment : BaseSportsEventsFragment<ScheduleViewModel, FragmentSch
     private fun updateAdapter(items: List<SportEvent>) {
         adapter?.updateItems(items.toMutableList()) ?: run {
             adapter = SportEventCardListAdapter(items.toMutableList(), viewModel)
-            binding.eventsView.adapter = adapter
+            binding.scheduleView.adapter = adapter
         }
     }
 }

@@ -1,5 +1,22 @@
 package com.app.sportsevents.ui.base
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavDirections
+import com.app.sportsevents.extension.toSingleEvent
+import com.app.sportsevents.navigation.NavigationCommand
 
-open class BaseSportsEventsViewModel : ViewModel()
+open class BaseSportsEventsViewModel : ViewModel() {
+    private val _navigationCommands = MutableLiveData<NavigationCommand>().toSingleEvent()
+            as MutableLiveData<NavigationCommand>
+    val navigationCommands: LiveData<NavigationCommand> = _navigationCommands
+
+    protected fun goBack() {
+        _navigationCommands.postValue(NavigationCommand.Back)
+    }
+
+    protected fun navigate(directions: NavDirections) {
+        _navigationCommands.postValue(NavigationCommand.ToDirection(directions))
+    }
+}

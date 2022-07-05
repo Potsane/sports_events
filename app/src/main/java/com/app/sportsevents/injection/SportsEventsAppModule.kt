@@ -1,11 +1,15 @@
 package com.app.sportsevents.injection
 
+import android.content.Context
 import androidx.viewbinding.BuildConfig
+import com.app.sportsevents.common.MediaPlayerFactory
+import com.app.sportsevents.common.MediaPlayerFactoryImpl
 import com.app.sportsevents.network.SportsEventsApiService
 import com.app.sportsevents.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -62,4 +66,9 @@ class SportsEventsAppModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): SportsEventsApiService =
         retrofit.create(SportsEventsApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideMediaPlayer(@ApplicationContext context: Context): MediaPlayerFactory =
+        MediaPlayerFactoryImpl(context)
 }

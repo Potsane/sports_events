@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
+
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -70,4 +72,16 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:4.12.0"
     kapt "com.github.bumptech.glide:compiler:4.12.0"
     implementation "com.github.bumptech.glide:okhttp3-integration:4.12.0@aar"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.0"
+
+    // dependency for exoplayer
+    implementation "com.google.android.exoplayer:exoplayer:2.18.0"
+   /* implementation "com.google.android.exoplayer:exoplayer-core:2.18.0"
+    implementation "com.google.android.exoplayer:exoplayer-dash:2.18.0"
+    implementation "com.google.android.exoplayer:exoplayer-hls:2.18.0"
+    implementation "com.google.android.exoplayer:exoplayer-smoothstreaming:2.18.0"
+    implementation "com.google.android.exoplayer:exoplayer-ui:2.18.0"*/
 }
