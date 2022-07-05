@@ -78,4 +78,7 @@ dependencies {
 
     // dependency for exoplayer
     implementation "com.google.android.exoplayer:exoplayer:2.18.0"
+
+    //Lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
 }
