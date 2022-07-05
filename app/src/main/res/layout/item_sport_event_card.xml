@@ -66,7 +66,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_subtitle"
                 app:showOrHide="@{item.date}"
-                app:text="@{item.date}"
+                app:formatDate="@{item.date}"
                 tools:text="Today, 14:00" />
 
             <ImageView
