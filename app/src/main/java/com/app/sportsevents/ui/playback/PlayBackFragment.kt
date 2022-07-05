@@ -12,7 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PlayBackFragment : BaseSportsEventsFragment<PlayBackViewModel, FragmentPlaybackBinding>() , Player.Listener{
+class PlayBackFragment : BaseSportsEventsFragment<PlayBackViewModel, FragmentPlaybackBinding>(),
+    Player.Listener {
 
     @Inject
     lateinit var mediaPlayerFactory: MediaPlayerFactory
@@ -27,6 +28,13 @@ class PlayBackFragment : BaseSportsEventsFragment<PlayBackViewModel, FragmentPla
         videoView.player = mediaPlayerFactory.createMediaPlayer(this)
         mediaPlayerFactory.addVideo()
         mediaPlayerFactory.play()
+    }
+
+    override fun onPlaybackStateChanged(state: Int) {
+        when (state) {
+            Player.STATE_BUFFERING -> showProgressBar(true)
+            else -> showProgressBar(false)
+        }
     }
 
     override fun onPause() {

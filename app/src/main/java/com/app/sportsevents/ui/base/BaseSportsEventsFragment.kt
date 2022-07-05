@@ -39,6 +39,7 @@ abstract class BaseSportsEventsFragment<VM : BaseSportsEventsViewModel, VDB : Vi
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.setVariable(BR.viewModel, viewModel)
+        viewModel.uiCommands.observe(viewLifecycleOwner, Observer(::onUiCommands))
         viewModel.navigationCommands.observe(viewLifecycleOwner, Observer(::onNavigate))
     }
 
@@ -46,6 +47,22 @@ abstract class BaseSportsEventsFragment<VM : BaseSportsEventsViewModel, VDB : Vi
 
     @LayoutRes
     protected abstract fun getLayoutId(): Int
+
+    protected fun showProgressBar(show: Boolean) =
+        (requireActivity() as MainActivity).showProgressBar(show)
+
+    @CallSuper
+    protected open fun onUiCommands(command: Any) {
+        when (command) {
+            is ShowProgress -> showProgressBar(command.show)
+        }
+    }
+
+    @CallSuper
+    override fun onPause() {
+        super.onPause()
+        showProgressBar(false)
+    }
 
     private fun onNavigate(navigationCommand: NavigationCommand) {
         when (navigationCommand) {
