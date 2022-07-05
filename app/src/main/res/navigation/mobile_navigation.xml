@@ -9,21 +9,41 @@
         android:id="@+id/navigation_events"
         android:name="com.app.sportsevents.ui.events.EventsFragment"
         android:label="@string/title_events"
-        tools:layout="@layout/fragment_events" >
+        tools:layout="@layout/fragment_events">
         <action
             android:id="@+id/to_play_back"
             app:destination="@id/navigation_play_back" />
+        <action
+            android:id="@+id/to_error"
+            app:destination="@id/navigation_error" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_schedule"
         android:name="com.app.sportsevents.ui.schedule.ScheduleFragment"
         android:label="@string/title_schedule"
-        tools:layout="@layout/fragment_schedule" />
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/to_error"
+            app:destination="@id/navigation_error" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_play_back"
         android:name="com.app.sportsevents.ui.playback.PlayBackFragment"
         android:label="@string/title_play_back"
         tools:layout="@layout/fragment_playback" />
+
+    <fragment
+        android:id="@+id/navigation_error"
+        android:name="com.app.sportsevents.ui.error.ErrorFragment"
+        android:label="@string/title_play_error"
+        tools:layout="@layout/fragment_error">
+        <action
+            android:id="@+id/to_home"
+            app:destination="@id/navigation_events"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/mobile_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

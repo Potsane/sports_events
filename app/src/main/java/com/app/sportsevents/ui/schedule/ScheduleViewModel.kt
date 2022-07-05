@@ -28,12 +28,16 @@ class ScheduleViewModel @Inject constructor(
     private fun getEvents() {
         viewModelScope.launch {
             postUiCommand(ShowProgress(true))
-            repository.getSchedule().let { response ->
-                if (response.isSuccessful) {
-                    _schedule.value = response.body()
+            try {
+                repository.getSchedule().let { response ->
+                    if (response.isSuccessful) {
+                        _schedule.value = response.body()
+                    }
                 }
+                postUiCommand(ShowProgress(false))
+            } catch (exception: Exception) {
+                navigate(ScheduleFragmentDirections.toError())
             }
-            postUiCommand(ShowProgress(false))
         }
     }
 

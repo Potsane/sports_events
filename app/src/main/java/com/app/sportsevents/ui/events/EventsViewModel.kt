@@ -29,12 +29,16 @@ class EventsViewModel @Inject constructor(
     private fun getEvents() {
         viewModelScope.launch {
             postUiCommand(ShowProgress(true))
-            repository.getEvents().let { response ->
-                if (response.isSuccessful) {
-                    _events.value = response.body()
+            try {
+                repository.getEvents().let { response ->
+                    if (response.isSuccessful) {
+                        _events.value = response.body()
+                    }
                 }
+                postUiCommand(ShowProgress(false))
+            } catch (exception: Exception) {
+                navigate(EventsFragmentDirections.toError())
             }
-            postUiCommand(ShowProgress(false))
         }
     }
 
