@@ -14,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
-    private val repository: SportEventsRepository,
-    private val mediaPlayerFactory: MediaPlayerFactory
+    private val repository: SportEventsRepository
 ) : BaseSportsEventsViewModel(), SportEventCardClickListener {
 
     private val _schedule = MutableLiveData<List<SportEvent>>()
