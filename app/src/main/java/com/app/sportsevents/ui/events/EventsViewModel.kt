@@ -7,6 +7,7 @@ import com.app.sportsevents.common.SportEventCardClickListener
 import com.app.sportsevents.network.entity.SportEvent
 import com.app.sportsevents.repository.SportEventsRepository
 import com.app.sportsevents.ui.base.BaseSportsEventsViewModel
+import com.app.sportsevents.ui.base.ShowProgress
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,11 +28,13 @@ class EventsViewModel @Inject constructor(
 
     private fun getEvents() {
         viewModelScope.launch {
+            postUiCommand(ShowProgress(true))
             repository.getEvents().let { response ->
                 if (response.isSuccessful) {
                     _events.value = response.body()
                 }
             }
+            postUiCommand(ShowProgress(false))
         }
     }
 
