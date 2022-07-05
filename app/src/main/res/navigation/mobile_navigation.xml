@@ -9,7 +9,11 @@
         android:id="@+id/navigation_events"
         android:name="com.app.sportsevents.ui.events.EventsFragment"
         android:label="@string/title_events"
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/to_play_back"
+            app:destination="@id/navigation_play_back" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_schedule"
@@ -18,7 +22,7 @@
         tools:layout="@layout/fragment_schedule" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_play_back"
         android:name="com.app.sportsevents.ui.playback.PlayBackFragment"
         android:label="@string/title_play_back"
         tools:layout="@layout/fragment_playback" />

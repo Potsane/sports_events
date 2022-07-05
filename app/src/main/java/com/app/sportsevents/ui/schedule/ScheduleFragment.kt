@@ -9,7 +9,9 @@ import com.app.sportsevents.common.SportEventCardListAdapter
 import com.app.sportsevents.databinding.FragmentScheduleBinding
 import com.app.sportsevents.network.entity.SportEvent
 import com.app.sportsevents.ui.base.BaseSportsEventsFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ScheduleFragment : BaseSportsEventsFragment<ScheduleViewModel, FragmentScheduleBinding>() {
 
     private var adapter: SportEventCardListAdapter? = null
@@ -31,7 +33,7 @@ class ScheduleFragment : BaseSportsEventsFragment<ScheduleViewModel, FragmentSch
     private fun updateAdapter(items: List<SportEvent>) {
         adapter?.updateItems(items.toMutableList()) ?: run {
             adapter = SportEventCardListAdapter(items.toMutableList(), viewModel)
-            binding.eventsView.adapter = adapter
+            binding.scheduleView.adapter = adapter
         }
     }
 }
