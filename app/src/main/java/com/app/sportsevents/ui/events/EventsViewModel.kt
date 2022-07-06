@@ -43,6 +43,6 @@ class EventsViewModel @Inject constructor(
     }
 
     override fun onEventCardClick(sportEvent: SportEvent) {
-        navigate(EventsFragmentDirections.toPlayBack())
+        navigate(EventsFragmentDirections.toPlayBack(sportEvent.videoUrl))
     }
 }
