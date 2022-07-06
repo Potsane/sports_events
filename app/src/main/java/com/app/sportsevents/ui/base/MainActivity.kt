@@ -29,10 +29,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showProgressBar(show: Boolean) {
-        if (show) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
+        progressBar?.let {
+            if (show) {
+                it.visibility = View.VISIBLE
+            } else {
+                it.visibility = View.GONE
+            }
         }
     }
 }
