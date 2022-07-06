@@ -8,7 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 interface MediaPlayerHandler {
     fun createMediaPlayer(listener: Player.Listener): ExoPlayer
-    fun addVideo()
+    fun addVideo(url : String)
     fun play()
     fun stop()
     fun getProgress(): Long
@@ -27,9 +27,7 @@ class MediaPlayerHandlerImpl(
         return player
     }
 
-    override fun addVideo() {
-        val url =
-            "https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/promo.mp4?alt=media"
+    override fun addVideo(url : String) {
         val video = MediaItem.fromUri(url)
         player.addMediaItems(listOf(video))
         player.prepare()

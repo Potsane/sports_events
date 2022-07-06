@@ -32,7 +32,11 @@
         android:id="@+id/navigation_play_back"
         android:name="com.app.sportsevents.ui.playback.PlayBackFragment"
         android:label="@string/title_play_back"
-        tools:layout="@layout/fragment_playback" />
+        tools:layout="@layout/fragment_playback" >
+        <argument
+            android:name="videoUrl"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_error"

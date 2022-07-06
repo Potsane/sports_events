@@ -3,6 +3,7 @@ package com.app.sportsevents.ui.playback
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.app.sportsevents.R
 import com.app.sportsevents.common.MediaPlayerHandler
 import com.app.sportsevents.databinding.FragmentPlaybackBinding
@@ -17,6 +18,7 @@ class PlayBackFragment : BaseSportsEventsFragment<PlayBackViewModel, FragmentPla
 
     @Inject
     lateinit var mediaPlayerHandler: MediaPlayerHandler
+    private val arguments: PlayBackFragmentArgs by navArgs()
 
     override fun createViewModel() = ViewModelProvider(this)[PlayBackViewModel::class.java]
 
@@ -31,7 +33,7 @@ class PlayBackFragment : BaseSportsEventsFragment<PlayBackViewModel, FragmentPla
         super.onViewCreated(view, savedInstanceState)
         val videoView = binding.videoView
         videoView.player = mediaPlayerHandler.createMediaPlayer(this)
-        mediaPlayerHandler.addVideo()
+        mediaPlayerHandler.addVideo(arguments.videoUrl)
         if (savedInstanceState != null) {
             mediaPlayerHandler.progressTo(savedInstanceState.getLong("VideoProgress"))
         }
