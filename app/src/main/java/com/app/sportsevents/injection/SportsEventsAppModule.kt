@@ -2,8 +2,8 @@ package com.app.sportsevents.injection
 
 import android.content.Context
 import androidx.viewbinding.BuildConfig
-import com.app.sportsevents.common.MediaPlayerFactory
-import com.app.sportsevents.common.MediaPlayerFactoryImpl
+import com.app.sportsevents.common.MediaPlayerHandler
+import com.app.sportsevents.common.MediaPlayerHandlerImpl
 import com.app.sportsevents.network.SportsEventsApiService
 import com.app.sportsevents.utils.BASE_URL
 import dagger.Module
@@ -69,6 +69,6 @@ class SportsEventsAppModule {
 
     @Provides
     @Singleton
-    fun provideMediaPlayer(@ApplicationContext context: Context): MediaPlayerFactory =
-        MediaPlayerFactoryImpl(context)
+    fun provideMediaPlayer(@ApplicationContext context: Context): MediaPlayerHandler =
+        MediaPlayerHandlerImpl(context)
 }
