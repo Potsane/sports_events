@@ -31,9 +31,7 @@ class EventsFragment : BaseSportsEventsFragment<EventsViewModel, FragmentEventsB
     }
 
     private fun updateAdapter(items: List<SportEvent>) {
-        adapter?.updateItems(items.toMutableList()) ?: run {
-            adapter = SportEventCardListAdapter(items.toMutableList(), viewModel)
-            binding.eventsView.adapter = adapter
-        }
+        adapter = SportEventCardListAdapter(items.toMutableList(), viewModel)
+        binding.eventsView.adapter = adapter
     }
 }
