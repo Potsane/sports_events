@@ -19,14 +19,15 @@ class ScheduleViewModel @Inject constructor(
     private val repository: SportEventsRepository
 ) : BaseSportsEventsViewModel(), SportEventCardClickListener {
 
-    var canRefresh = true
-    var isFirstLoad = true
+    private var canRefresh = true
+    private var isFirstLoad = true
     private val _schedule = MutableLiveData<List<SportEvent>>()
     val schedule: LiveData<List<SportEvent>> = _schedule
 
     fun onResume() {
         isFirstLoad = true
-        if (_schedule.value == null) getSchedule()
+        /*if (_schedule.value == null)*/
+        getSchedule()
     }
 
     private fun getSchedule() {
