@@ -5,7 +5,7 @@ import androidx.annotation.RequiresApi
 import java.time.Instant
 
 private fun getTime(timeMillis: Long): String {
-    val minute = (timeMillis / (1000 * 60)) % 60;
+    val minute = (timeMillis / (1000 * 60)) % 60
     val hour = (timeMillis / (1000 * 60 * 60)) % 24
     return "$hour:$minute"
 }
