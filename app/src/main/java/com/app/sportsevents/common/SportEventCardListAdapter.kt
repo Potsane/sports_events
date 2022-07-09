@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sportsevents.R
 import com.app.sportsevents.BR
@@ -15,7 +16,7 @@ class SportEventCardListAdapter(
     private val listener: SportEventCardClickListener
 ) : RecyclerView.Adapter<SportEventCardListAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemSportEventCardBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.item_sport_event_card,
@@ -26,21 +27,23 @@ class SportEventCardListAdapter(
     }
 
     fun updateItems(updatedList: List<SportEvent>) {
+        val diffUtil = SportEventListDiffUtil(items, updatedList)
+        val diffResults = DiffUtil.calculateDiff(diffUtil)
         items.clear()
         items.addAll(updatedList)
-        notifyDataSetChanged()
+        diffResults.dispatchUpdatesTo(this)
     }
 
     override fun onBindViewHolder(holder: SportEventCardListAdapter.ViewHolder, position: Int) {
-        val item : SportEvent = items[position]
+        val item: SportEvent = items[position]
         holder.bind(item)
     }
 
     override fun getItemCount() = items.size
 
     inner class ViewHolder(
-         val view: View,
-         val binding: ItemSportEventCardBinding
+        val view: View,
+        val binding: ItemSportEventCardBinding
     ) : RecyclerView.ViewHolder(view) {
 
         fun bind(item: SportEvent) {

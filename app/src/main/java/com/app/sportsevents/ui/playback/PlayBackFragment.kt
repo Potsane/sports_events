@@ -8,6 +8,7 @@ import com.app.sportsevents.R
 import com.app.sportsevents.common.MediaPlayerHandler
 import com.app.sportsevents.databinding.FragmentPlaybackBinding
 import com.app.sportsevents.ui.base.BaseSportsEventsFragment
+import com.app.sportsevents.utils.VIDEO_PROGRESS_KEY
 import com.google.android.exoplayer2.Player
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,7 +27,7 @@ class PlayBackFragment : BaseSportsEventsFragment<PlayBackViewModel, FragmentPla
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putLong("VideoProgress", mediaPlayerHandler.getProgress())
+        outState.putLong(VIDEO_PROGRESS_KEY, mediaPlayerHandler.getProgress())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +36,7 @@ class PlayBackFragment : BaseSportsEventsFragment<PlayBackViewModel, FragmentPla
         videoView.player = mediaPlayerHandler.createMediaPlayer(this)
         mediaPlayerHandler.addVideo(arguments.videoUrl)
         if (savedInstanceState != null) {
-            mediaPlayerHandler.progressTo(savedInstanceState.getLong("VideoProgress"))
+            mediaPlayerHandler.progressTo(savedInstanceState.getLong(VIDEO_PROGRESS_KEY))
         }
         mediaPlayerHandler.play()
     }
