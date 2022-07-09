@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.app.sportsevents.common.SportEventCardClickListener
+import com.app.sportsevents.extension.isTomorrow
+import com.app.sportsevents.extension.toTimeMillis
 import com.app.sportsevents.network.entity.SportEvent
 import com.app.sportsevents.repository.SportEventsRepository
 import com.app.sportsevents.ui.base.BaseSportsEventsViewModel
@@ -26,7 +28,6 @@ class ScheduleViewModel @Inject constructor(
 
     fun onResume() {
         isFirstLoad = true
-        /*if (_schedule.value == null)*/
         getSchedule()
     }
 
@@ -37,7 +38,9 @@ class ScheduleViewModel @Inject constructor(
                 try {
                     repository.getSchedule().let { response ->
                         if (response.isSuccessful) {
-                            _schedule.value = response.body()
+                            val result = response.body()?.filter { it.date.isTomorrow() }
+                                ?.sortedBy { it.date.toTimeMillis() }
+                            result?.let { _schedule.value = it }
                         }
                     }
                     isFirstLoad = false

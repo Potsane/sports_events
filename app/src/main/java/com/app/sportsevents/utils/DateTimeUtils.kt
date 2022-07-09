@@ -1,63 +1,51 @@
 package com.app.sportsevents.utils
 
+import android.annotation.SuppressLint
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.TimeZone
+import kotlin.math.abs
 
-fun getDateObject(timeMillis: Long): DateObject {
-    val date = Date(timeMillis)
-    val calendar = Calendar.getInstance()
-    calendar.time = date
+private fun daysDifference(timeToCompare: Long): Long {
+    val startOfToday = DateTime(DateTimeZone.UTC).withTimeAtStartOfDay()
+    val startOfTodayMillis = startOfToday.millis
+    val difference = timeToCompare - startOfTodayMillis
 
-    val dayOfTheMonth = calendar.get(Calendar.DAY_OF_MONTH)
-    val month = calendar.get(Calendar.MONTH)
-    val year = calendar.get(Calendar.YEAR)
-
-    return DateObject(
-        getDayOfWeek(timeMillis),
-        dayOfTheMonth,
-        getMonthOfYear(month),
-        year,
-        getTime(timeMillis)
-    )
+    return (difference / (1000 * 60 * 60 * 24)) % 365
 }
 
-data class DateObject(
-    var dayOfWeek: String,
-    var dayOfTheMonth: Int,
-    var month: String,
-    var year: Int,
-    var time: String
-)
-
-fun getDayOfWeek(timeMillis: Long): String {
-    val calendar = Calendar.getInstance()
-    calendar.time = Date(timeMillis)
-    val formatter = SimpleDateFormat("EEEE")
-    return formatter.format(calendar.time)
+private fun getDayRepresentation(daysFromToday: Long, time: String): String {
+    return when {
+        daysFromToday == 1L -> "Tomorrow, $time"
+        daysFromToday > 1L -> "In $daysFromToday days"
+        daysFromToday == -1L -> "Yesterday, $time"
+        daysFromToday < -1L -> "${abs(daysFromToday)} days ago"
+        else -> "Today, $time"
+    }
 }
 
-fun getTime(timeMillis: Long): String {
+@SuppressLint("SimpleDateFormat")
+private fun getTime(timeMillis: Long): String {
     val dateFormat = SimpleDateFormat("HH:mm a")
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     return dateFormat.format(Date(timeMillis))
 }
 
-fun getMonthOfYear(representation: Int): String {
-    return when (representation) {
-        1 -> "January"
-        2 -> "February"
-        3 -> "March"
-        4 -> "April"
-        5 -> "May"
-        6 -> "June"
-        7 -> "July"
-        8 -> "August"
-        9 -> "September"
-        10 -> "October"
-        11 -> "November"
-        12 -> "December"
-        else -> ""
+@SuppressLint("SimpleDateFormat")
+fun dateStringToTimeMillis(date: String): Long {
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").apply {
+        timeZone = TimeZone.getTimeZone("UTC")
     }
+    return format.parse(date)?.time ?: 0
+}
+
+fun isDateTomorrow(timeMillis: Long) = daysDifference(timeMillis) == 1L
+
+fun getDateAndTime(date: String): String {
+    val timeMillis = dateStringToTimeMillis(date)
+    val time = getTime(timeMillis)
+    val daysDifference = daysDifference(timeMillis)
+    return getDayRepresentation(daysDifference, time)
 }
