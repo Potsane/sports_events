@@ -1,12 +1,10 @@
 package com.app.sportsevents.binding
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.app.sportsevents.utils.getDateObject
-import java.time.Instant
+import com.app.sportsevents.utils.getDateAndTime
 
 @BindingAdapter("showOrHide")
 fun showOrHide(view: TextView, text: String?) {
@@ -20,13 +18,5 @@ fun showOrHide(view: TextView, text: String?) {
 @SuppressLint("SetTextI18n")
 @BindingAdapter("formatDate")
 fun formatDate(textView: TextView, text: String?) {
-    text?.let {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val timeMillis = Instant.parse(text).toEpochMilli()
-            val dateObject = getDateObject(timeMillis)
-            textView.text = "${dateObject.dayOfWeek}, ${dateObject.dayOfTheMonth} ${dateObject.month} ${dateObject.year} - ${dateObject.time}"
-        } else {
-            textView.text = it
-        }
-    }
+    text?.let { textView.text = getDateAndTime(it) }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.app.sportsevents.common.SportEventCardClickListener
+import com.app.sportsevents.extension.toTimeMillis
 import com.app.sportsevents.network.entity.SportEvent
 import com.app.sportsevents.repository.SportEventsRepository
 import com.app.sportsevents.ui.base.BaseSportsEventsViewModel
@@ -32,7 +33,8 @@ class EventsViewModel @Inject constructor(
             try {
                 repository.getEvents().let { response ->
                     if (response.isSuccessful) {
-                        _events.value = response.body()
+                        val result = response.body()?.sortedBy { it.date.toTimeMillis() }
+                        result?.let { _events.value = it }
                     }
                 }
                 postUiCommand(ShowProgress(false))
