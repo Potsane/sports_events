@@ -41,7 +41,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:text="Oops an error has occurred, please try again"
+                android:text="@string/generic_error_message"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,10 +49,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/animation_view"
                 tools:text="Here is the text" />
 
-            <com.google.android.material.button.MaterialButton
-                style="?attr/materialButtonOutlinedStyle"
-                app:strokeColor="?attr/colorPrimary"
-                android:id="@+id/button_more"
+            <Button
+                android:id="@+id/button_gotit"
+                style="@style/BorderlessButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -60,23 +59,21 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:onClick="@{() -> viewModel.goHome()}"
-                android:text="Got it"
-                android:textColor="?attr/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/got_it"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_translate"
+                app:layout_constraintTop_toBottomOf="@+id/button_try_again"
                 tools:text="Got it" />
 
             <Button
-                android:id="@+id/button_translate"
+                android:id="@+id/button_try_again"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:onClick="@{() -> viewModel.retry()}"
-                android:text="Try again"
+                android:text="@string/button_try_again"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
