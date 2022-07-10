@@ -48,8 +48,10 @@ abstract class BaseSportsEventsFragment<VM : BaseSportsEventsViewModel, VDB : Vi
     @LayoutRes
     protected abstract fun getLayoutId(): Int
 
-    protected fun showProgressBar(show: Boolean) =
-        (requireActivity() as MainActivity).showProgressBar(show)
+    protected fun showProgressBar(show: Boolean) {
+        val activity = requireActivity()
+        if (activity is MainActivity) activity.showProgressBar(show)
+    }
 
     @CallSuper
     protected open fun onUiCommands(command: Any) {

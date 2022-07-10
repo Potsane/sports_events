@@ -7,4 +7,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_play_back">Play back</string>
     <string name="title_play_error">Error</string>
+    <string name="generic_error_message">Oops an error has occurred, please try again</string>
+    <string name="button_try_again">Try again</string>
+    <string name="got_it">Got it</string>
 </resources>
