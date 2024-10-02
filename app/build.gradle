@@ -63,7 +63,7 @@ dependencies {
     testImplementation 'androidx.test:core-ktx:1.4.0'
 
     debugImplementation 'androidx.fragment:fragment-testing:1.5.0'
-    implementation 'androidx.fragment:fragment-ktx:1.5.0'
+    implementation 'androidx.fragment:fragment-ktx:1.8.3'
 
     //ui tetsing  - hilt
     androidTestImplementation 'com.google.dagger:hilt-android-testing:2.41'
