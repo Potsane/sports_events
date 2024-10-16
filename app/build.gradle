@@ -49,7 +49,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.8.3'
 
     //ui testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -105,7 +105,7 @@ dependencies {
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.0"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.8.3"
 
     // dependency for exoplayer
     implementation "com.google.android.exoplayer:exoplayer:2.18.0"
