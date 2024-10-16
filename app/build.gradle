@@ -48,7 +48,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.8.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
 
     //ui testing
@@ -104,7 +104,7 @@ dependencies {
     implementation "com.github.bumptech.glide:okhttp3-integration:4.12.0@aar"
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.8.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.0"
 
     // dependency for exoplayer
